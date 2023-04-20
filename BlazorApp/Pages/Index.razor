@@ -1,0 +1,64 @@
+﻿@page "/"
+
+<PageTitle>Index</PageTitle>
+
+<div class="col-md-6">
+    <RadzenCard>
+        <RadzenStack Orientation="Orientation.Vertical" Gap="4px">
+            <RadzenStack Orientation="Orientation.Vertical" Gap="0">
+                Nome:
+                <RadzenTextBox @bind-Value="@usuario.Nome" Placeholder="Nome..." />
+            </RadzenStack>
+            <RadzenStack Orientation="Orientation.Vertical" Gap="0">
+                Idade:
+                <RadzenNumeric @bind-Value="@usuario.Idade" />
+            </RadzenStack>
+            <RadzenStack Orientation="Orientation.Vertical" Gap="0">
+                Email:
+                <RadzenTextBox @bind-Value="@usuario.Email" Placeholder="Email..." />
+            </RadzenStack>
+            <RadzenButton Click="@Envia" Text="Enviar" ButtonStyle="ButtonStyle.Primary" />
+        </RadzenStack>
+    </RadzenCard>
+
+    <h1 class="mt-4">Usuários cadastrados</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Idade</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in usuarios)
+            {
+                <tr>
+                    <td>@user.Nome</td>
+                    <td>@user.Idade</td>
+                    <td>@user.Email</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@code {
+    List<Usuario> usuarios = new ();
+    Usuario usuario = new ();
+
+    void Envia()
+    {
+        Usuario usuarioCopia = new ();
+
+        usuarioCopia.Nome = usuario.Nome;
+        usuarioCopia.Idade = usuario.Idade;
+        usuarioCopia.Email = usuario.Email;
+
+        usuarios.Add(usuarioCopia);
+    }
+}
+
+
+
